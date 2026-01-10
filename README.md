@@ -26,9 +26,9 @@ The player can choose between three difficulty modes:
 
 | Difficulty | Number Range | Attempts |
 |-----------|--------------|----------|
-| Easy      | 1 – 10       | 5        |
+| Easy      | 1 – 10       | 3        |
 | Medium    | 1 – 20       | 4        |
-| Hard      | 1 – 50       | 3        |
+| Hard      | 1 – 50       | 5        |
 
 Each round uses the selected difficulty settings.
 
