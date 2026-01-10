@@ -12,7 +12,7 @@ while difficulty == 0:                                                          
     user_input2 = input("1:Easy(Numbers from 1-10, 3 attempts)\n"                                  
                         "2:Medium(Numbers from 1-20, 4 attempts)\n" 
                         "3:Hard(Numbers from 1-50, 5 attempts)\n"
-                        "Choose your difficulty")                                                   # All Modes listed so the player can choose 
+                        "Choose your difficulty:")                                                   # All Modes listed so the player can choose 
     
     if not user_input2.strip().isdigit():                                                           # Checking if the input is a number 
         print("Please enter a valid number")                                                        # Notification if its not a number
