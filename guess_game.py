@@ -1,205 +1,86 @@
 import random                                                                                       # For using random generated numbers
 
-
-attempts = 3                                                                                        # Amount of Attempts
-rounds_played = 0                                                                                   # Amount of played rounds
-total_rounds = 0                                                                                    # Amount of total ronds to play
-rounds_won = 0                                                                                      # Amount of rounds won
-difficulty = 0                                                                                      # For choosing bewteen 3 different modes later
-
-while difficulty == 0:                                                                              # This Loop runs as long as the player typed a valid number
-
-    user_input2 = input("1:Easy(Numbers from 1-10, 3 attempts)\n"                                  
-                        "2:Medium(Numbers from 1-20, 4 attempts)\n" 
-                        "3:Hard(Numbers from 1-50, 5 attempts)\n"
-                        "Choose your difficulty:")                                                   # All Modes listed so the player can choose 
+def give_hints(secret, guess):                                                                      # Function for helpfull hints
+    if secret % 2 == 0:                                                                             # deviding the secret number by 2 and if there is no remainder it means that the secret number is even 
+        print("The number we are looking for is even")
+    else:                                                                                           # Otherwise its an odd number
+        print("The number we are looking for is odd")
     
-    if not user_input2.strip().isdigit():                                                           # Checking if the input is a number 
-        print("Please enter a valid number")                                                        # Notification if its not a number
-        continue                                                                                    # Looping this until a valid number was typed
+    distance = abs(secret - guess)                                                                  # Subtracting the secret number by the guess, removing the (-) sign and stroing it in the variable distance
+    if distance <= 2:                                                                               # If the distance between secret and guess is only two numbers it shows the message in the next line                                                      
+        print("Hot")
+    elif distance <= 5:
+        print("Warm")
+    else:
+        print("Cold")
 
-    choice = int(user_input2)                                                                       # The input is safed in a temporary storage 
+    if guess < secret:                                                                              # These hints show if the guess made is lower or higher than the secret number
+        print("Too low")
+    elif guess > secret:
+        print("Too high")
 
-    if choice < 1 or choice > 3:                                                                    # Checking if the input is between 1 and 3 so the difficulty can be selected 
-        print("Please enter a number between 1 and 3")                                              # Notification to make the player type a number between 1 and 3
-        continue                                                                                    # Looping this until the player made a valid input
+def play_round(min_num, max_num, max_attempts):                                                     # Function for one round
+    secret = random.randint(min_num, max_num)                                                       # Creates a random number in the range of min_num(minimal Number) and max_num(maximum number)
+    attempts = max_attempts                                                                         # Storing the max attempts from the difficulty menu into another variable
 
-    difficulty = choice                                                                             # Transferring the temporary storage to the main storage
+    while attempts > 0:                                                                             # Loops as long as attempts are left
+        guess_input = input(f"Guess a Number ({min_num}-{max_num}): ")                              # Main question of the game is also showing the range the player chose 
 
-    if difficulty == 1:                                                                             # Selecting the easy mode 
-        print("You chose easy mode")
+        if not guess_input.isdigit():                                                               # checking if the guess is a valid number 
+            print("Please enter a valid number.")
+            continue                                                                                # Asking main question again if the guess is not a valid number 
 
-        while total_rounds < 1:                                                                     # Making sure the player decides how long they want to play
+        guess = int(guess_input)                                                                    # Storing the guess as an integer
+
+        if guess < min_num or guess > max_num:                                                      # Testing if the guess was made outside the playable range
+            print(f"Number must be between {min_num} and {max_num}.")                               # Notification about the invalid input
+            continue                                                                                # Looping this until a valid input was made
+
+        if guess == secret:                                                                         # Testing if the guess was right
+            print("You win!")                                                                       # Notification about the round win
+            return True                                                                             # Round won
+        print("Wrong guess!")                                                                       # If the guess was wrong the test aove is being skipped
+        give_hints(secret, guess)                                                                   # Hints from the give_hints function are shown
+
+        attempts -= 1                                                                               # Taking away 1 attempt after round loss
+        print(f"Attempts left: {attempts}")                                                         # Showing the player how many attempts are left 
+
+    print(f"You lost! The number was {secret}")                                                     # Notification that shows as soon as no attempts are left
+    return False                                                                                    # ROund lost
+
+def choose_difficulty():                                                                            # Function for choosing difficulty
+    while True:                                                                                     # This Loop is only there if the player types in a wron mode
+        choice = input("Choose difficulty (easy/medium/hard)").lower()                              # User chooses the difficulty and the .lower() fuction handles makes every input written small
+
+        if choice == "easy":                                                                    
+            return 1, 10, 5                                                                         # Returning min_num, max_num and attempts for the chosen difficulty
+        elif choice == "medium":
+            return 1, 20, 4
+        elif choice == "hard":
+            return 1, 50, 3
+        else:
+            print("Invalid difficulty.")                                                            # Message that the input is not readable and jumping back to the start of this fuctions loop
+
+
+total_rounds = 0                                                                                    # Amount of total ronds to play
                                                                                  
-            user_input1 = input("How many rounds do you want to play?: ")                           # Player can decide how many rounds he/she plays
+while total_rounds < 1:                                                                             # Making sure the player decides how long they want to play
+                                                                                 
+    user_input1 = input("How many rounds do you want to play?: ")                                   # Player can decide how many rounds he/she plays
 
-            if not user_input1.strip().isdigit():                                                   # Making sure the input is an integer
-                print("Please enter a valid number")                                                # Info that the game needs an integer to start
-                continue                                                                            # Looping this until an integer was entered
+    if not user_input1.strip().isdigit():                                                           # Making sure the input is an integer
+        print("Please enter a valid number")                                                        # Info that the game needs an integer to start
+        continue                                                                                    # Looping this until an integer was entered
 
-            total_rounds = int(user_input1)                                                         # Copying the user input to the int total rounds
+    total_rounds = int(user_input1)                                                                 # Copying the user input to the int total rounds
 
-            while rounds_played < total_rounds:                                                     # Looping the game as long as the int for the played rounds is smaller than the total rounds 
+min_num, max_num, attempts = choose_difficulty()                                                    # Filling variables with infos from chosen difficulty
 
-                secret = random.randint(1, 10)                                                      # Generating a random number at the start of each round
-                print("Guess the number (1-10)")                                                    # Instructions for the player 
+wins = 0                                                                                            # Counter to later display won rounds
 
+for round_number in range(1, total_rounds + 1):                                                     # Creating a loop for every round 
+    print(f"\n---Round {round_number}---")                                                          # Displaying the current round
+    if play_round(min_num, max_num, attempts):                                                      # Starting the round function 
+        wins +=1                                                                                    # If the round function returns True it will add one win to the score
 
-                while attempts > 0:                                                                 # Loop Starts only if there are 1 or more attempts left 
-
-                    user_input = input("Your guess: ")                                              # Taking the first input of the player 
-
-                    if not user_input.strip().isdigit():                                            # checking if the input is an integer 
-                        print("Please enter a valid number")                                        # Asking for another input
-                        continue                                                                    # Jumping back to the start of the loop
-
-                    guess = int(user_input)                                                         # Transferring the user input to a better readable integer
-
-                    if guess < 1 or guess > 10:                                                     # Checking if the input is in the printed range of the game
-                        print("Number must be between 1 and 10")                                    # Reminder that the number has to be between 1 and 10       
-                        continue                                                                    # Jumping back to the start of the loop
-
-                    if guess == secret:                                                             # Checking if the guess is equal to the randomly generated secret number
-                        print(f"Congrats!! {secret} was the right number! You win!")                # Little notification so the player knows that he/she won
-                        rounds_played += 1                                                          # Adding one to the played rounds
-                        print(f"Rounds played {rounds_played} out of {total_rounds}")               # Notification for the player
-                        rounds_won += 1                                                             # Adding one to the rounds won
-                        attempts = 3                                                                # resetting the attempts 
-                        break                                                                       # Stopping the loop/game
-
-                    elif guess < secret:                                                            # Checking if the guess is lower then the randomly generated secret number
-                        print("Too low!")                                                           # Little notification to inform the player about their guess
-
-                    else:                                                                           # Checking if the guess is greater then the randomly generated secret number
-                        print("Too high!")                                                          # Little notification to inform the player about their guess
-
-                    attempts -= 1                                                                   # Removing one attempt after each guess until it reaches zero
-                    print("Attempts left:", attempts)                                               # Reminder of how many attempts are left 
-
-                if attempts == 0:                                                                   # Checking how many attempts are left since while loop is not running anymore
-                    print("Game Over! The number was:", secret)                                     # Giving a end of the game notification
-                    rounds_played += 1                                                              # Adding one to the rounds played
-                    print("Rounds played:", rounds_played)                                          # Notification for the player
-                    attempts = 3                                                                    # Resetting the attempts
-                    
-            if rounds_played == total_rounds:                                                       # checking if all srounds were played
-                print(f"You won {rounds_won} round(s) out of {rounds_played}")                      # End result
-
-    elif difficulty == 2:                                                                           # Selecting medium mode
-        print("you chose medium mode")                                                              # Notification about the selection made
-        attempts = 4                                                                                # changing attempts to 4 so the game is still playable
-
-        while total_rounds < 1:                                                                     
-
-            user_input1 = input("How many rounds do you want to play?: ")                           # Player can decide how many rounds he/she plays
-
-            if not user_input1.strip().isdigit():                                                   # Making sure the input is an integer
-                print("Please enter a valid number")                                                # Info that the game needs an integer to start
-                continue                                                                            # Looping this until an integer was entered
-
-            total_rounds = int(user_input1)                                                         # Copying the user input to the int total rounds
-
-            while rounds_played < total_rounds:                                                     # Looping the game as long as the int for the played rounds is smaller than the total rounds 
-
-                secret = random.randint(1, 20)                                                      # Generating a random number at the start of each round
-                print("Guess the number (1-20)")                                                    # Instructions for the player 
-
-                while attempts > 0:                                                                 # Loop Starts only if there are 1 or more attempts left 
-
-                    user_input = input("Your guess: ")                                              # Taking the first input of the player 
-
-                    if not user_input.strip().isdigit():                                            # checking if the input is an integer 
-                        print("Please enter a valid number")                                        # Asking for another input
-                        continue                                                                    # Jumping back to the start of the loop
-
-                    guess = int(user_input)                                                         # Transferring the user input to a better readable integer
-
-                    if guess < 1 or guess > 20:                                                     # Checking if the input is in the printed range of the game
-                        print("Number must be between 1 and 20")                                    # Reminder that the number has to be between 1 and 10       
-                        continue                                                                    # Jumping back to the start of the loop
-
-                    if guess == secret:                                                             # Checking if the guess is equal to the randomly generated secret number
-                        print(f"Congrats!! {secret} was the right number! You win!")                # Little notification so the player knows that he/she won
-                        rounds_played += 1                                                          # Adding one to the played rounds
-                        print(f"Rounds played {rounds_played} out of {total_rounds}")               # Notification for the player
-                        rounds_won += 1                                                             # Adding one to the rounds won
-                        attempts = 4                                                                # resetting the attempts 
-                        break                                                                       # Stopping the loop/game
-
-                    elif guess < secret:                                                            # Checking if the guess is lower then the randomly generated secret number
-                        print("Too low!")                                                           # Little notification to inform the player about their guess
-
-                    else:                                                                           # Checking if the guess is greater then the randomly generated secret number
-                        print("Too high!")                                                          # Little notification to inform the player about their guess
-
-                    attempts -= 1                                                                   # Removing one attempt after each guess until it reaches zero
-                    print("Attempts left:", attempts)                                               # Reminder of how many attempts are left 
-
-                if attempts == 0:                                                                   # Checking how many attempts are left since while loop is not running anymore
-                    print("Game Over! The number was:", secret)                                     # Giving a end of the game notification
-                    rounds_played += 1                                                              # Adding one to the rounds played
-                    print("Rounds played:", rounds_played)                                          # Notification for the player
-                    attempts = 4                                                                    # Resetting the attempts
-
-            if rounds_played == total_rounds:                                                       # checking if all srounds were played
-                print(f"You won {rounds_won} round(s) out of {rounds_played}")                      # End result
-
-    elif difficulty == 3:                                                                           # Selecting hard mode
-        print("you chose hard mode")                                                                # Notification for the selected difficulty 
-        attempts = 5                                                                                # Changing amount of attampts to make sure its stil playable
-
-        while total_rounds < 1:                        
-
-            user_input1 = input("How many rounds do you want to play?: ")                           # Player can decide how many rounds he/she plays
-
-            if not user_input1.strip().isdigit():                                                   # Making sure the input is an integer
-                print("Please enter a valid number")                                                # Info that the game needs an integer to start
-                continue                                                                            # Looping this until an integer was entered
-
-            total_rounds = int(user_input1)                                                         # Copying the user input to the int total rounds
-
-            while rounds_played < total_rounds:                                                     # Looping the game as long as the int for the played rounds is smaller than the total rounds 
-
-                secret = random.randint(1, 50)                                                      # Generating a random number at the start of each round
-                print("Guess the number (1-50)")                                                    # Instructions for the player 
-
-
-                while attempts > 0:                                                                 # Loop Starts only if there are 1 or more attempts left 
-
-                    user_input = input("Your guess: ")                                              # Taking the first input of the player 
-
-                    if not user_input.strip().isdigit():                                            # checking if the input is an integer 
-                        print("Please enter a valid number")                                        # Asking for another input
-                        continue                                                                    # Jumping back to the start of the loop
-
-                    guess = int(user_input)                                                         # Transferring the user input to a better readable integer
-
-                    if guess < 1 or guess > 50:                                                     # Checking if the input is in the printed range of the game
-                        print("Number must be between 1 and 50")                                    # Reminder that the number has to be between 1 and 10       
-                        continue                                                                    # Jumping back to the start of the loop
-
-                    if guess == secret:                                                             # Checking if the guess is equal to the randomly generated secret number
-                        print(f"Congrats!! {secret} was the right number! You win!")                # Little notification so the player knows that he/she won
-                        rounds_played += 1                                                          # Adding one to the played rounds
-                        print(f"Rounds played {rounds_played} out of {total_rounds}")               # Notification for the player
-                        rounds_won += 1                                                             # Adding one to the rounds won
-                        attempts = 5                                                                # resetting the attempts 
-                        break                                                                       # Stopping the loop/game
-
-                    elif guess < secret:                                                            # Checking if the guess is lower then the randomly generated secret number
-                        print("Too low!")                                                           # Little notification to inform the player about their guess
-
-                    else:                                                                           # Checking if the guess is greater then the randomly generated secret number
-                        print("Too high!")                                                          # Little notification to inform the player about their guess
-
-                    attempts -= 1                                                                   # Removing one attempt after each guess until it reaches zero
-                    print("Attempts left:", attempts)                                               # Reminder of how many attempts are left 
-
-                if attempts == 0:                                                                   # Checking how many attempts are left since while loop is not running anymore
-                    print("Game Over! The number was:", secret)                                     # Giving a end of the game notification
-                    rounds_played += 1                                                              # Adding one to the rounds played
-                    print("Rounds played:", rounds_played)                                          # Notification for the player
-                    attempts = 5                                                                    # Resetting the attempts
-
-            if rounds_played == total_rounds:                                                       # checking if all srounds were played
-                print(f"You won {rounds_won} round(s) out of {rounds_played}")                      # End result
+print(f"\nGame over! You won {wins} out of {total_rounds} Rounds.")                                 # Game end notification shows how many rounds were one 
