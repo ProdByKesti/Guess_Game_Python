@@ -11,8 +11,7 @@ It’s designed as a learning project to practice *core Python concepts* in a pr
 
 - Random secret number generation
 - Multiple difficulty levels
-- Customizable number of attempts
-- Multiple rounds per game
+- Customizable number of rounds
 - Input validation (only valid integers allowed)
 - *Advanced hint system*
   - Even / Odd hint
@@ -25,8 +24,8 @@ It’s designed as a learning project to practice *core Python concepts* in a pr
 ## 🕹 How to Play
 
 1. Start the game
-2. Choose a difficulty (easy, medium, hard)
-3. Choose how many rounds you want to play
+2. Choose how many rounds you want to play
+3. Choose a difficulty (easy, medium, hard)
 4. Guess the secret number within the allowed attempts
 5. Use hints to narrow down the correct number
 6. Try to win as many rounds as possible
@@ -80,6 +79,7 @@ This structure makes the project easier to extend and maintain.
 - Game loop logic
 - Basic game design and user feedback
 - Refactoring existing code into cleaner solutions
+- Using different types of loops
 
 ---
 
@@ -94,9 +94,11 @@ This structure makes the project easier to extend and maintain.
 
 - Add achievements
 - Add score tracking
-- Difficulty-based hint limitations
 - Timer-based mode
 - GUI version
+- Saves for every player
+- Add ASCII art
+- Add storylines
 
 ---
 
