@@ -5,31 +5,31 @@ attempts = 3                                                                    
 rounds_played = 0                                                                                   # Amount of played rounds
 total_rounds = 0                                                                                    # Amount of total ronds to play
 rounds_won = 0                                                                                      # Amount of rounds won
-difficulty = 0                                                                                      
+difficulty = 0                                                                                      # For choosing bewteen 3 different modes later
 
-while difficulty == 0:
+while difficulty == 0:                                                                              # This Loop runs as long as the player typed a valid number
 
-    user_input2 = input("1:Easy(Numbers from 1-10, 3 attempts)\n" \
-                        "2:Medium(Numbers from 1-20, 4 attempts)\n" \
+    user_input2 = input("1:Easy(Numbers from 1-10, 3 attempts)\n"                                  
+                        "2:Medium(Numbers from 1-20, 4 attempts)\n" 
                         "3:Hard(Numbers from 1-50, 5 attempts)\n"
-                        "Choose your difficulty")
+                        "Choose your difficulty")                                                   # All Modes listed so the player can choose 
     
-    if not user_input2.strip().isdigit(): 
-        print("Please enter a valid number")
-        continue
+    if not user_input2.strip().isdigit():                                                           # Checking if the input is a number 
+        print("Please enter a valid number")                                                        # Notification if its not a number
+        continue                                                                                    # Looping this until a valid number was typed
 
-    choice = int(user_input2)
+    choice = int(user_input2)                                                                       # The input is safed in a temporary storage 
 
-    if choice < 1 or choice > 3:
-        print("Please enter a number between 1 and 3")
-        continue
+    if choice < 1 or choice > 3:                                                                    # Checking if the input is between 1 and 3 so the difficulty can be selected 
+        print("Please enter a number between 1 and 3")                                              # Notification to make the player type a number between 1 and 3
+        continue                                                                                    # Looping this until the player made a valid input
 
-    difficulty = choice
+    difficulty = choice                                                                             # Transferring the temporary storage to the main storage
 
-    if difficulty == 1:
+    if difficulty == 1:                                                                             # Selecting the easy mode 
         print("You chose easy mode")
 
-        while total_rounds < 1:
+        while total_rounds < 1:                                                                     # Making sure the player decides how long they want to play
                                                                                  
             user_input1 = input("How many rounds do you want to play?: ")                           # Player can decide how many rounds he/she plays
 
@@ -85,9 +85,9 @@ while difficulty == 0:
             if rounds_played == total_rounds:                                                       # checking if all srounds were played
                 print(f"You won {rounds_won} round(s) out of {rounds_played}")                      # End result
 
-    elif difficulty == 2:
-        print("you chose medium mode")
-        attempts = 4
+    elif difficulty == 2:                                                                           # Selecting medium mode
+        print("you chose medium mode")                                                              # Notification about the selection made
+        attempts = 4                                                                                # changing attempts to 4 so the game is still playable
 
         while total_rounds < 1:                                                                     
 
@@ -144,9 +144,9 @@ while difficulty == 0:
             if rounds_played == total_rounds:                                                       # checking if all srounds were played
                 print(f"You won {rounds_won} round(s) out of {rounds_played}")                      # End result
 
-    elif difficulty == 3:
-        print("you chose hard mode")
-        attempts = 5
+    elif difficulty == 3:                                                                           # Selecting hard mode
+        print("you chose hard mode")                                                                # Notification for the selected difficulty 
+        attempts = 5                                                                                # Changing amount of attampts to make sure its stil playable
 
         while total_rounds < 1:                        
 
