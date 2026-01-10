@@ -1,66 +1,122 @@
 # 🎲 Number Guessing Game (Python)
 
-A beginner-friendly number guessing game written in Python.  
-The player must guess a randomly generated number within a limited number of attempts.
+A console-based number guessing game written in Python.  
+This project started as a simple guessing game and was gradually expanded with *difficulty levels, refactored code structure, and an advanced hint system*.
 
-This project is part of my Python learning journey and focuses on clean logic, input validation, and game design using loops and conditionals.
+It’s designed as a learning project to practice *core Python concepts* in a practical and fun way.
 
 ---
 
 ## 🚀 Features
 
-- Random secret number generated every round
-- Input validation (only integers allowed)
-- Enforced number ranges based on difficulty
-- Limited attempts per round
-- Multi-round gameplay
-- Player chooses how many rounds to play
-- Score tracking across rounds
-- Clear feedback after each guess (Too high, Too low, You win, Game over)
+- Random secret number generation
+- Multiple difficulty levels
+- Customizable number of attempts
+- Multiple rounds per game
+- Input validation (only valid integers allowed)
+- *Advanced hint system*
+  - Even / Odd hint
+  - Cold / Warm / Hot distance-based hints
+- Clean and readable code using *functions*
+- No duplicated logic (refactored)
+
+---
+
+## 🕹 How to Play
+
+1. Start the game
+2. Choose a difficulty (easy, medium, hard)
+3. Choose how many rounds you want to play
+4. Guess the secret number within the allowed attempts
+5. Use hints to narrow down the correct number
+6. Try to win as many rounds as possible
 
 ---
 
 ## 🎚 Difficulty Levels
 
-The player can choose between three difficulty modes:
-
 | Difficulty | Number Range | Attempts |
-|-----------|--------------|----------|
-| Easy      | 1 – 10       | 3        |
-| Medium    | 1 – 20       | 4        |
-| Hard      | 1 – 50       | 5        |
-
-Each round uses the selected difficulty settings.
+|----------|--------------|----------|
+| Easy     | 1 – 10       | 5 attempts |
+| Medium   | 1 – 20       | 4 attempts |
+| Hard     | 1 – 50       | 3 attempts |
 
 ---
 
-## 🕹 How the Game Works
+## 💡 Hint System
 
-1. The player selects a difficulty level.
-2. The player chooses how many rounds they want to play.
-3. For each round:
-   - A random number is generated based on the difficulty.
-   - The player has a limited number of attempts to guess the number.
-   - Feedback is given after each guess.
-4. The game tracks how many rounds the player wins.
-5. At the end, the final score is displayed.
+After an incorrect guess, the game provides helpful hints:
 
----
+- *Even / Odd*  
+  Indicates whether the secret number is even or odd
 
-## 🧠 What I Learned
+- *Cold / Warm / Hot*
+  - 🔥 Hot: very close to the secret number
+  - 🌡 Warm: somewhat close
+  - ❄ Cold: far away from the secret number
 
-- Using while loops for game flow
-- Nested loops (round loop + guessing loop)
-- Input validation with .isdigit()
-- Safe type conversion using int()
-- Generating random numbers with random.randint()
-- Using break and continue correctly
-- Structuring code for readability and maintainability
+This makes the game more interactive and strategic.
 
 ---
 
-## ▶ How to Run the Game
+## 🧠 Code Structure
 
+The code is organized using functions to avoid repetition and improve readability:
+
+- choose_difficulty() – handles difficulty selection
+- play_round() – runs one full round of the game
+- give_hints() – handles all hint logic
+- Additional helper functions for validation and game flow
+
+This structure makes the project easier to extend and maintain.
+
+---
+
+## 🧩 What I Learned
+
+- Using functions to remove duplicated code
+- Passing parameters and using return values
+- Input validation and error handling
+- Game loop logic
+- Basic game design and user feedback
+- Refactoring existing code into cleaner solutions
+
+---
+
+## 🛠 Technologies Used
+
+- Python 3
+- Standard library only (random)
+
+---
+
+## 📦 Future Ideas
+
+- Add achievements
+- Add score tracking
+- Difficulty-based hint limitations
+- Timer-based mode
+- GUI version
+
+---
+
+## 📄 Version History
+
+### v1.0.0
+- Basic number guessing game
+
+### v1.1.0
+- Added difficulty levels
+- Added attempt limits
+
+### v1.2.0
+- Refactored duplicated code into functions
+- Improved code readability and structure
+
+### v1.3.0
+- Added advanced hint system:
+  - Even / Odd hints
+  - Cold / Warm / Hot distance hints
 Make sure Python 3 is installed, then run:
 
 ```bash
