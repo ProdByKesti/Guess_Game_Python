@@ -1,4 +1,4 @@
-🗝 Treasure Chest Guessing Game (Python)
+#🗝 Treasure Chest Guessing Game (Python)
 
 A text-based Python game that combines a classic number guessing mechanic with arcade gameplay, adventure progression, items, and story elements.
 
@@ -6,7 +6,7 @@ This project is designed as a learning journey into Python fundamentals such as 
 
 ⸻
 
-🚀 Features
+##🚀 Features
 	•	Random secret number generation
 	•	Multiple difficulty levels
 	•	Customizable number of attempts
@@ -28,7 +28,7 @@ This project is designed as a learning journey into Python fundamentals such as 
 
 ⸻
 
-🕹 How to Play
+##🕹 How to Play
 	1.	Start the game
 	2.	Choose a game mode (arcade or adventure)
 	3.	If Arcade Mode:
@@ -44,7 +44,7 @@ This project is designed as a learning journey into Python fundamentals such as 
 
 ⸻
 
-🎚 Difficulty Levels
+##🎚 Difficulty Levels
 
 Difficulty	Number Range	Attempts
 Easy	1 – 10	More attempts
@@ -55,7 +55,7 @@ Adventure Mode scales difficulty automatically as you progress.
 
 ⸻
 
-💡 Hint System
+##💡 Hint System
 
 After an incorrect guess, the game provides helpful hints:
 	•	Higher / Lower – whether the guess is too low or too high
@@ -67,16 +67,16 @@ After an incorrect guess, the game provides helpful hints:
 
 ⸻
 
-🎒 Items System (Adventure Mode)
+##🎒 Items System (Adventure Mode)
 
 Items can drop randomly after winning a chest:
 
-💎 Diamond (Super Hint)
+##💎 Diamond (Super Hint)
 	•	Rare drop
 	•	Reveals powerful hints about the secret number
 	•	Can be used anytime during a round
 
-🧪 Health Potion
+##🧪 Health Potion
 	•	Restores player health
 	•	Essential for survival in Adventure Mode
 
@@ -84,7 +84,7 @@ Items are managed through an interactive inventory menu.
 
 ⸻
 
-❤ Health System (Adventure Mode)
+##❤ Health System (Adventure Mode)
 	•	Player starts with a fixed amount of health
 	•	Losing a chest reduces health
 	•	Health potions restore health
@@ -92,7 +92,7 @@ Items are managed through an interactive inventory menu.
 
 ⸻
 
-🧩 Code Structure
+##🧩 Code Structure
 
 The project uses functions heavily for modularity and clarity:
 	•	choose_difficulty() — handles difficulty selection
@@ -112,7 +112,7 @@ This structure keeps the code clean, reusable, and easy to extend.
 
 ⸻
 
-🧠 What I Learned
+##🧠 What I Learned
 	•	Using functions to remove duplicated code
 	•	Passing parameters and using return values
 	•	Input validation and error handling
@@ -123,13 +123,13 @@ This structure keeps the code clean, reusable, and easy to extend.
 
 ⸻
 
-🛠 Technologies Used
+##🛠 Technologies Used
 	•	Python 3
 	•	Standard library only (random)
 
 ⸻
 
-📦 Future Ideas
+##📦 Future Ideas
 	•	Add achievements and unlockables
 	•	Expand item types and effects
 	•	Timer-based rounds or challenges
@@ -137,7 +137,7 @@ This structure keeps the code clean, reusable, and easy to extend.
 
 ⸻
 
-📄 Version History
+##📄 Version History
 
 v1.0.0
 	•	Basic number guessing game
